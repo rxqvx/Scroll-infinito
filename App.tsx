@@ -13,7 +13,7 @@ export default function App() {
   const baseURl = "https://api.github.com";
   const perPage = 20;
 
-  const [data, setData] = React.useState([{ id: 1, full_name: "Rique" }]);
+  const [data, setData] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [page, setPage] = React.useState(1);
 
@@ -55,7 +55,8 @@ export default function App() {
         style={{ marginTop: 35 }}
         contentContainerStyle={{ marginHorizontal: 20 }}
         data={data}
-        keyExtractor={(item) => String(item.id)} //ao invés de full_name deveria ser id, porém está retornando ids iguais, com isso vou pensar numa solução melhor
+        keyExtractor={(item, index) => String(index)}// this option above is correctly, but sometimes the ids is same, so I resolved in this option
+        // keyExtractor={(item, index) => String(item.id)}
         renderItem={({ item }) => <ListItem data={item} />}
         onEndReached={loadPayload}
         onEndReachedThreshold={0.1}
